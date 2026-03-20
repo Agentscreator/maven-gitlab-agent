@@ -20,7 +20,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-brown.svg?style=for-the-badge)](LICENSE)
 [![GitLab](https://img.shields.io/badge/GitLab-Duo_Agent_Platform-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com)
 [![Claude](https://img.shields.io/badge/Powered_by-Claude_Queen-8B4513?style=for-the-badge)](https://anthropic.com)
-[![Hackathon](https://img.shields.io/badge/GitLab_AI_Hackathon-2024_Submission-6B2D2D?style=for-the-badge)](https://gitlab.com)
+[![Hackathon](https://img.shields.io/badge/GitLab_AI_Hackathon-2026_Submission-6B2D2D?style=for-the-badge)](https://gitlab.com)
 
 <br/>
 
@@ -377,6 +377,6 @@ Because your codebase deserves a teammate that never clocks out.
 
 <br/>
 
-*GitLab AI Hackathon — 2024 Submission*
+*GitLab AI Hackathon — 2026 Submission*
 
 </div>
