@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Crown, X } from "lucide-react";
+import { Hexagon, X } from "lucide-react";
 import { sessionsApi } from "@/api/sessions";
 import { loadPersistedTabs, savePersistedTabs, TAB_STORAGE_KEY, type PersistedTabState } from "@/lib/tab-persistence";
 
@@ -87,11 +87,11 @@ export default function TopBar({ tabs: tabsProp, onTabClick, onCloseTab, canClos
   }, [onCloseTab]);
 
   return (
-    <div className="relative h-12 flex items-center justify-between px-5 border-b border-border/60 bg-card/50 backdrop-blur-sm flex-shrink-0">
+    <div className="relative h-13 flex items-center justify-between px-5 border-b border-border/40 bg-card/60 backdrop-blur-md flex-shrink-0" style={{ boxShadow: "0 1px 0 hsl(20,10%,14%)" }}>
       <div className="flex items-center gap-3 min-w-0">
         <button onClick={() => navigate("/")} className="flex items-center gap-2 hover:opacity-80 transition-opacity flex-shrink-0">
-          <Crown className="w-4 h-4 text-primary" />
-          <span className="text-sm font-semibold text-primary">Open Hive</span>
+          <Hexagon className="w-4 h-4 text-primary" />
+          <span className="text-sm font-bold tracking-wide text-primary">Maven</span>
         </button>
 
         {tabs.length > 0 && (

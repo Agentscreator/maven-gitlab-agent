@@ -30,75 +30,75 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 45 93% 47%;
-    --primary-foreground: 0 0% 2%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --background: 20 8% 4%;
+    --foreground: 30 15% 92%;
+    --card: 20 8% 7%;
+    --card-foreground: 30 15% 92%;
+    --popover: 20 8% 7%;
+    --popover-foreground: 30 15% 92%;
+    --primary: 28 82% 54%;
+    --primary-foreground: 20 8% 4%;
+    --secondary: 20 10% 12%;
+    --secondary-foreground: 30 12% 82%;
+    --muted: 20 8% 10%;
+    --muted-foreground: 25 10% 52%;
+    --accent: 20 10% 12%;
+    --accent-foreground: 30 12% 82%;
+    --destructive: 0 65% 52%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 45 93% 47%;
-    --radius: 0.5rem;
+    --border: 20 10% 14%;
+    --input: 20 10% 14%;
+    --ring: 28 82% 54%;
+    --radius: 0.625rem;
   }
 
   .dark {
-    --background: 240 6% 6%;
-    --foreground: 0 0% 95%;
-    --card: 240 5% 8%;
-    --card-foreground: 0 0% 95%;
-    --popover: 240 5% 8%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 45 93% 47%;
-    --primary-foreground: 0 0% 2%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 50.6%;
+    --background: 20 8% 4%;
+    --foreground: 30 15% 92%;
+    --card: 20 8% 7%;
+    --card-foreground: 30 15% 92%;
+    --popover: 20 8% 7%;
+    --popover-foreground: 30 15% 92%;
+    --primary: 28 82% 54%;
+    --primary-foreground: 20 8% 4%;
+    --secondary: 20 10% 12%;
+    --secondary-foreground: 30 12% 82%;
+    --muted: 20 8% 10%;
+    --muted-foreground: 25 10% 52%;
+    --accent: 20 10% 12%;
+    --accent-foreground: 30 12% 82%;
+    --destructive: 0 65% 52%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 45 93% 47%;
+    --border: 20 10% 14%;
+    --input: 20 10% 14%;
+    --ring: 28 82% 54%;
 
     /* Agent graph node status colors */
-    --node-running: 45 95% 58%;
-    --node-looping: 38 90% 55%;
-    --node-complete: 43 70% 45%;
-    --node-pending: 35 15% 28%;
-    --node-pending-bg: 35 10% 12%;
-    --node-pending-border: 35 10% 20%;
-    --node-error: 0 65% 55%;
+    --node-running: 28 88% 60%;
+    --node-looping: 22 82% 56%;
+    --node-complete: 28 68% 46%;
+    --node-pending: 20 12% 22%;
+    --node-pending-bg: 20 8% 10%;
+    --node-pending-border: 20 10% 18%;
+    --node-error: 0 65% 54%;
 
     /* Agent graph trigger node colors */
-    --trigger-bg: 210 25% 14%;
-    --trigger-border: 210 30% 30%;
-    --trigger-text: 210 30% 65%;
-    --trigger-icon: 210 40% 55%;
+    --trigger-bg: 20 15% 12%;
+    --trigger-border: 25 22% 26%;
+    --trigger-text: 28 28% 62%;
+    --trigger-icon: 28 50% 54%;
 
     /* Draft graph chrome colors */
-    --draft-edge: 220 10% 30%;
-    --draft-edge-arrow: 220 10% 35%;
-    --draft-edge-label: 220 10% 45%;
-    --draft-back-edge: 220 10% 25%;
-    --draft-group-fill: 220 15% 18%;
-    --draft-group-stroke: 220 10% 40%;
-    --draft-chrome-text: 220 10% 50%;
-    --draft-chrome-text-dim: 220 10% 55%;
-    --draft-node-text: 0 0% 78%;
-    --draft-node-text-hover: 0 0% 92%;
+    --draft-edge: 20 10% 28%;
+    --draft-edge-arrow: 20 10% 34%;
+    --draft-edge-label: 20 10% 44%;
+    --draft-back-edge: 20 10% 22%;
+    --draft-group-fill: 20 12% 16%;
+    --draft-group-stroke: 20 10% 38%;
+    --draft-chrome-text: 20 10% 48%;
+    --draft-chrome-text-dim: 20 10% 52%;
+    --draft-node-text: 30 10% 76%;
+    --draft-node-text-hover: 30 15% 92%;
   }
 }
 
@@ -107,8 +107,16 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(28 60% 18% / 0.18), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 80%, hsl(20 40% 10% / 0.12), transparent);
   }
 
   button {
@@ -119,6 +127,21 @@
     padding: 0;
     margin: 0;
   }
+}
+
+/* Maven glass card utility */
+.maven-card {
+  background: hsl(20 8% 7% / 0.8);
+  border: 1px solid hsl(20 10% 14%);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 0 hsl(30 20% 30% / 0.06) inset,
+    0 4px 24px hsl(20 8% 2% / 0.4);
+}
+
+/* Primary glow utility */
+.maven-glow {
+  box-shadow: 0 0 32px hsl(28 82% 54% / 0.12), 0 0 8px hsl(28 82% 54% / 0.06);
 }
 
 * {

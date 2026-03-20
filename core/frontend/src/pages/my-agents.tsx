@@ -55,17 +55,22 @@ export default function MyAgents() {
       <div className="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full overflow-y-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-xl font-semibold text-foreground">My Agents</h1>
+            <h1 className="text-xl font-bold tracking-tight text-foreground">My Workers</h1>
             <p className="text-sm text-muted-foreground mt-1">
               {activeCount} active · {idleCount} idle
             </p>
           </div>
           <button
             onClick={() => navigate("/workspace?agent=new-agent")}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150"
+            style={{
+              background: "linear-gradient(135deg, hsl(28,82%,58%) 0%, hsl(22,75%,46%) 100%)",
+              color: "hsl(20 8% 4%)",
+              boxShadow: "0 2px 10px hsl(28,82%,54%,0.3)",
+            }}
           >
             <Plus className="w-4 h-4" />
-            New Agent
+            New Worker
           </button>
         </div>
 
@@ -85,10 +90,23 @@ export default function MyAgents() {
               <button
                 key={agent.path}
                 onClick={() => navigate(`/workspace?agent=${encodeURIComponent(agent.path)}`)}
-                className="group text-left rounded-xl border border-border/60 bg-card/50 p-5 hover:border-primary/40 hover:bg-card transition-all duration-200"
+                className="group text-left rounded-xl p-5 transition-all duration-200"
+                style={{
+                  background: "hsl(20 8% 7% / 0.85)",
+                  border: "1px solid hsl(20 10% 14%)",
+                  boxShadow: "0 1px 0 hsl(30 20% 30% / 0.04) inset",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(28 82% 54% / 0.3)";
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 1px 0 hsl(30 20% 30% / 0.04) inset, 0 4px 24px hsl(28 82% 54% / 0.07)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(20 10% 14%)";
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 1px 0 hsl(30 20% 30% / 0.04) inset";
+                }}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <div className="p-2 rounded-lg bg-muted/60">
+                  <div className="p-2 rounded-lg" style={{ background: "hsl(20 8% 10%)", border: "1px solid hsl(20 10% 16%)" }}>
                     <Bot className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
                   <div className="flex items-center gap-1.5">

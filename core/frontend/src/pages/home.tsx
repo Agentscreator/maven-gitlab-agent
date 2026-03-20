@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Crown, Mail, Briefcase, Shield, Search, Newspaper, ArrowRight, Hexagon, Send, Bot, Radar, Reply, DollarSign, MapPin, Calendar, UserPlus, Twitter } from "lucide-react";
+import { Hexagon, Mail, Briefcase, Shield, Search, Newspaper, ArrowRight, Send, Bot, Radar, Reply, DollarSign, MapPin, Calendar, UserPlus, Twitter, GitMerge } from "lucide-react";
 import TopBar from "@/components/TopBar";
 import type { LucideIcon } from "lucide-react";
 import { agentsApi } from "@/api/agents";
@@ -45,10 +45,10 @@ function agentSlug(path: string): string {
 // --- Generic prompt hints (not tied to specific agents) ---
 
 const promptHints = [
-  "Check my inbox for urgent emails",
-  "Find senior engineer roles that match my profile",
-  "Research the latest trends in AI agents",
-  "Run a security scan on my domain",
+  "Fix the failing pipeline in my GitLab project",
+  "Triage open issues and assign to the right owners",
+  "Scan for vulnerabilities and open a patch MR",
+  "Review open MRs for compliance violations",
 ];
 
 export default function Home() {
@@ -99,27 +99,37 @@ export default function Home() {
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <div className="w-full max-w-2xl">
-          {/* Queen Bee greeting */}
-          <div className="text-center mb-8">
+          {/* Maven greeting */}
+          <div className="text-center mb-10">
             <div
-              className="inline-flex w-12 h-12 rounded-2xl items-center justify-center mb-4"
+              className="inline-flex w-14 h-14 rounded-2xl items-center justify-center mb-5"
               style={{
-                backgroundColor: "hsl(45,95%,58%,0.1)",
-                border: "1.5px solid hsl(45,95%,58%,0.25)",
-                boxShadow: "0 0 24px hsl(45,95%,58%,0.08)",
+                background: "linear-gradient(135deg, hsl(28,60%,18%,0.6) 0%, hsl(20,8%,10%,0.8) 100%)",
+                border: "1.5px solid hsl(28,82%,54%,0.3)",
+                boxShadow: "0 0 32px hsl(28,82%,54%,0.12), 0 0 8px hsl(28,82%,54%,0.06)",
               }}
             >
-              <Crown className="w-6 h-6 text-primary" />
+              <Hexagon className="w-7 h-7 text-primary" />
             </div>
-            <h1 className="text-xl font-semibold text-foreground mb-1.5">What can I help you with?</h1>
-            <p className="text-sm text-muted-foreground">
-              I'm your Queen Bee — I create and coordinate worker agents to handle tasks for you.
+            <h1 className="text-2xl font-bold tracking-tight text-foreground mb-2">
+              What needs to be done?
+            </h1>
+            <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
+              Maven's Queen coordinates a swarm of DevSecOps workers that watch and fix your GitLab projects — automatically.
             </p>
           </div>
 
           {/* Chat input */}
           <form onSubmit={handleSubmit} className="mb-6">
-            <div className="relative border border-border/60 rounded-xl bg-card/50 hover:border-primary/30 focus-within:border-primary/40 transition-colors shadow-sm">
+            <div
+              className="relative rounded-xl transition-all duration-200"
+              style={{
+                background: "hsl(20 8% 7% / 0.9)",
+                border: "1px solid hsl(20 10% 14%)",
+                boxShadow: "0 1px 0 hsl(30 20% 30% / 0.05) inset, 0 4px 20px hsl(20 8% 2% / 0.35)",
+              }}
+              onFocus={() => {}}
+            >
               <textarea
                 ref={textareaRef}
                 rows={1}
@@ -136,14 +146,19 @@ export default function Home() {
                     handleSubmit(e);
                   }
                 }}
-                placeholder="Describe a task for the hive..."
-                className="w-full bg-transparent px-5 py-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none rounded-xl resize-none overflow-y-auto"
+                placeholder="Describe a DevSecOps task for Maven..."
+                className="w-full bg-transparent px-5 py-4 pr-14 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none rounded-xl resize-none overflow-y-auto"
               />
               <div className="absolute right-3 bottom-2.5">
                 <button
                   type="submit"
                   disabled={!inputValue.trim()}
-                  className="w-7 h-7 rounded-lg bg-primary/90 hover:bg-primary text-primary-foreground flex items-center justify-center transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150 disabled:opacity-25 disabled:cursor-not-allowed"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(28,82%,60%) 0%, hsl(22,75%,48%) 100%)",
+                    boxShadow: inputValue.trim() ? "0 2px 8px hsl(28,82%,54%,0.35)" : "none",
+                    color: "hsl(20 8% 4%)",
+                  }}
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>
@@ -155,18 +170,44 @@ export default function Home() {
           <div className="flex items-center justify-center gap-3 mb-6">
             <button
               onClick={() => setShowAgents(!showAgents)}
-              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/[0.03] transition-all"
+              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-150"
+              style={{
+                background: "hsl(20 8% 8% / 0.8)",
+                border: "1px solid hsl(20 10% 16%)",
+                color: "hsl(25 10% 52%)",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(28 82% 54% / 0.35)";
+                (e.currentTarget as HTMLButtonElement).style.color = "hsl(30 15% 82%)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(20 10% 16%)";
+                (e.currentTarget as HTMLButtonElement).style.color = "hsl(25 10% 52%)";
+              }}
             >
-              <Hexagon className="w-4 h-4 text-primary/60" />
-              <span>Try a sample agent</span>
+              <GitMerge className="w-4 h-4 text-primary/60" />
+              <span>Try a sample worker</span>
               <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-200 ${showAgents ? "rotate-90" : ""}`} />
             </button>
             <button
               onClick={() => navigate("/my-agents")}
-              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/[0.03] transition-all"
+              className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-150"
+              style={{
+                background: "hsl(20 8% 8% / 0.8)",
+                border: "1px solid hsl(20 10% 16%)",
+                color: "hsl(25 10% 52%)",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(28 82% 54% / 0.35)";
+                (e.currentTarget as HTMLButtonElement).style.color = "hsl(30 15% 82%)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(20 10% 16%)";
+                (e.currentTarget as HTMLButtonElement).style.color = "hsl(25 10% 52%)";
+              }}
             >
               <Bot className="w-4 h-4 text-primary/60" />
-              <span>My Agents</span>
+              <span>My Workers</span>
             </button>
           </div>
 
@@ -176,7 +217,20 @@ export default function Home() {
               <button
                 key={hint}
                 onClick={() => handlePromptHint(hint)}
-                className="text-xs text-muted-foreground hover:text-foreground border border-border/50 hover:border-primary/30 rounded-full px-3.5 py-1.5 transition-all hover:bg-primary/[0.03]"
+                className="text-xs rounded-full px-3.5 py-1.5 transition-all duration-150"
+                style={{
+                  color: "hsl(25 10% 48%)",
+                  border: "1px solid hsl(20 10% 14%)",
+                  background: "hsl(20 8% 7% / 0.6)",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(28 82% 54% / 0.3)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "hsl(30 15% 78%)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(20 10% 14%)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "hsl(25 10% 48%)";
+                }}
               >
                 {hint}
               </button>
@@ -205,7 +259,20 @@ export default function Home() {
                       <button
                         key={agent.path}
                         onClick={() => handleSelect(agent.path)}
-                        className="text-left rounded-xl border border-border/60 p-4 transition-all duration-200 hover:border-primary/30 hover:bg-primary/[0.03] group relative overflow-hidden h-full flex flex-col"
+                        className="text-left rounded-xl p-4 transition-all duration-200 group relative overflow-hidden h-full flex flex-col"
+                        style={{
+                          background: "hsl(20 8% 7% / 0.8)",
+                          border: "1px solid hsl(20 10% 14%)",
+                          boxShadow: "0 1px 0 hsl(30 20% 30% / 0.04) inset",
+                        }}
+                        onMouseEnter={e => {
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(28 82% 54% / 0.28)";
+                          (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 1px 0 hsl(30 20% 30% / 0.04) inset, 0 4px 20px hsl(28 82% 54% / 0.06)";
+                        }}
+                        onMouseLeave={e => {
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "hsl(20 10% 14%)";
+                          (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 1px 0 hsl(30 20% 30% / 0.04) inset";
+                        }}
                       >
                         <div className="flex flex-col flex-1">
                           <div className="flex items-center gap-3 mb-2.5">
