@@ -244,8 +244,13 @@ def cmd_gitlab_webhooks(args: argparse.Namespace) -> int:
     for hook in hooks:
         print(f"  [{hook.get('id')}] {hook.get('url')}")
         events = []
-        for key in ("push_events", "merge_requests_events", "issues_events",
-                     "pipeline_events", "job_events"):
+        for key in (
+            "push_events",
+            "merge_requests_events",
+            "issues_events",
+            "pipeline_events",
+            "job_events",
+        ):
             if hook.get(key):
                 events.append(key.replace("_events", "").replace("_", " "))
         print(f"       Events: {', '.join(events) or 'none'}")

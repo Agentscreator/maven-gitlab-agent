@@ -41,9 +41,9 @@ GITLAB_EVENT_MAP: dict[str, str] = {
 class GitLabWebhookEvent:
     """Parsed GitLab webhook event."""
 
-    event_type: str          # Internal category (push, issue, merge_request, etc.)
-    gitlab_event: str        # Raw X-Gitlab-Event header value
-    action: str | None       # Sub-action (opened, closed, merged, etc.)
+    event_type: str  # Internal category (push, issue, merge_request, etc.)
+    gitlab_event: str  # Raw X-Gitlab-Event header value
+    action: str | None  # Sub-action (opened, closed, merged, etc.)
     project_id: int | None
     project_path: str | None
     payload: dict[str, Any]
@@ -73,6 +73,7 @@ def verify_gitlab_token(
         return False
     # Constant-time comparison to prevent timing attacks
     import hmac
+
     return hmac.compare_digest(request_token, cfg.webhook_secret)
 
 

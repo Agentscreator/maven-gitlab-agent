@@ -171,9 +171,7 @@ class GitLabClient:
             for hook in result:
                 if hook.get("url") == webhook_url:
                     logger.info("Webhook already registered (id=%s), updating.", hook["id"])
-                    return self._put(
-                        f"/projects/{encoded}/hooks/{hook['id']}", json=body
-                    )
+                    return self._put(f"/projects/{encoded}/hooks/{hook['id']}", json=body)
 
         return self._post(f"/projects/{encoded}/hooks", json=body)
 

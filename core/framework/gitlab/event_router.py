@@ -23,13 +23,13 @@ logger = logging.getLogger(__name__)
 class MavenGoal:
     """A goal for the Maven swarm to pursue."""
 
-    goal_type: str                    # security_fix, pipeline_recovery, triage, etc.
-    priority: str                     # critical, high, medium, low
-    summary: str                      # Human-readable one-liner
-    context: dict[str, Any]           # Structured data for the worker
-    suggested_workers: list[str]      # Worker castes to involve
+    goal_type: str  # security_fix, pipeline_recovery, triage, etc.
+    priority: str  # critical, high, medium, low
+    summary: str  # Human-readable one-liner
+    context: dict[str, Any]  # Structured data for the worker
+    suggested_workers: list[str]  # Worker castes to involve
     requires_human_approval: bool = False
-    source_event: str = ""            # The event_key that triggered this goal
+    source_event: str = ""  # The event_key that triggered this goal
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -53,7 +53,9 @@ class GitLabEventRouter:
                 goal.source_event = event.event_key
                 logger.info(
                     "Routed %s → %s (priority=%s)",
-                    event.event_key, goal.goal_type, goal.priority,
+                    event.event_key,
+                    goal.goal_type,
+                    goal.priority,
                 )
             return goal
         except Exception:
