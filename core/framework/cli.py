@@ -99,6 +99,11 @@ def main():
 
     register_debugger_commands(subparsers)
 
+    # Register GitLab commands (gitlab setup, register, status, etc.)
+    from framework.gitlab.cli import register_gitlab_commands
+
+    register_gitlab_commands(subparsers)
+
     args = parser.parse_args()
 
     if hasattr(args, "func"):

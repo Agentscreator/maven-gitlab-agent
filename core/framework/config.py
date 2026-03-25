@@ -344,3 +344,32 @@ class RuntimeConfig:
     api_key: str | None = field(default_factory=get_api_key)
     api_base: str | None = field(default_factory=get_api_base)
     extra_kwargs: dict[str, Any] = field(default_factory=get_llm_extra_kwargs)
+
+
+# ---------------------------------------------------------------------------
+# GitLab configuration (delegates to framework.gitlab.config)
+# ---------------------------------------------------------------------------
+
+
+def get_gitlab_token() -> str | None:
+    """Return the GitLab personal access token, if configured."""
+    token = os.environ.get("GITLAB_TOKEN")
+    if token:
+        return token
+    return get_hive_config().get("gitlab", {}).get("token")
+
+
+def get_gitlab_url() -> str:
+    """Return the GitLab instance URL."""
+    url = os.environ.get("GITLAB_URL")
+    if url:
+        return url
+    return get_hive_config().get("gitlab", {}).get("url", "https://gitlab.com")
+
+
+def get_gitlab_project() -> str | None:
+    """Return the configured GitLab project (namespace/name)."""
+    project = os.environ.get("GITLAB_PROJECT")
+    if project:
+        return project
+    return get_hive_config().get("gitlab", {}).get("project")

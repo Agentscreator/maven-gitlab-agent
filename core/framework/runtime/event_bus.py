@@ -122,6 +122,10 @@ class EventType(StrEnum):
     # External triggers
     WEBHOOK_RECEIVED = "webhook_received"
 
+    # GitLab-specific events
+    GITLAB_EVENT_RECEIVED = "gitlab_event_received"
+    GITLAB_GOAL_CREATED = "gitlab_goal_created"
+
     # Custom events
     CUSTOM = "custom"
 

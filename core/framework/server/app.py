@@ -249,6 +249,21 @@ def create_app(model: str | None = None) -> web.Application:
     register_graph_routes(app)
     register_log_routes(app)
 
+    # GitLab webhook routes (no-op if GitLab is not configured)
+    try:
+        from framework.gitlab.webhook_integration import register_gitlab_webhook_routes
+
+        # EventBus is created per-session, but webhook routes need a shared bus.
+        # Create a lightweight bus for webhook ingestion; goals are forwarded
+        # to session-specific buses via the SessionManager.
+        from framework.runtime.event_bus import EventBus
+
+        gitlab_event_bus = EventBus()
+        app["gitlab_event_bus"] = gitlab_event_bus
+        register_gitlab_webhook_routes(app, gitlab_event_bus)
+    except Exception:
+        logger.debug("GitLab webhook routes not registered (non-fatal)", exc_info=True)
+
     # Static file serving — Option C production mode
     # If frontend/dist/ exists, serve built frontend files on /
     _setup_static_serving(app)
