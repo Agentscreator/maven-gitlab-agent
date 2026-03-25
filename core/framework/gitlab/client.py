@@ -68,15 +68,21 @@ class GitLabClient:
     # ------------------------------------------------------------------
 
     def _get(self, path: str, params: dict[str, Any] | None = None) -> Any:
-        resp = httpx.get(self._url(path), headers=self._headers(), params=params or {}, timeout=_TIMEOUT)
+        resp = httpx.get(
+            self._url(path), headers=self._headers(), params=params or {}, timeout=_TIMEOUT
+        )
         return self._handle_response(resp)
 
     def _post(self, path: str, json: dict[str, Any] | None = None) -> Any:
-        resp = httpx.post(self._url(path), headers=self._headers(), json=json or {}, timeout=_TIMEOUT)
+        resp = httpx.post(
+            self._url(path), headers=self._headers(), json=json or {}, timeout=_TIMEOUT
+        )
         return self._handle_response(resp)
 
     def _put(self, path: str, json: dict[str, Any] | None = None) -> Any:
-        resp = httpx.put(self._url(path), headers=self._headers(), json=json or {}, timeout=_TIMEOUT)
+        resp = httpx.put(
+            self._url(path), headers=self._headers(), json=json or {}, timeout=_TIMEOUT
+        )
         return self._handle_response(resp)
 
     def _delete(self, path: str) -> Any:

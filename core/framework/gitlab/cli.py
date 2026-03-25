@@ -11,8 +11,6 @@ Provides:
 from __future__ import annotations
 
 import argparse
-import json
-import sys
 
 
 def register_gitlab_commands(subparsers: argparse._SubParsersAction) -> None:
@@ -93,19 +91,25 @@ def cmd_gitlab_setup(args: argparse.Namespace) -> int:
 
     # Token
     token_hint = "****" + current.token[-4:] if current.token and len(current.token) > 4 else ""
-    token_prompt = f"  Personal Access Token [{token_hint}]: " if token_hint else "  Personal Access Token: "
+    if token_hint:
+        token_prompt = f"  Personal Access Token [{token_hint}]: "
+    else:
+        token_prompt = "  Personal Access Token: "
     token = input(token_prompt).strip()
     if not token and current.token:
         token = current.token
 
     if not token:
         print("\n  ⚠ No token provided. GitLab integration will be disabled.")
-        print("  Create one at: {}//-/user_settings/personal_access_tokens".format(url))
+        print(f"  Create one at: {url}//-/user_settings/personal_access_tokens")
         return 1
 
     # Project
     project_default = current.project or ""
-    project_prompt = f"  Default project [{project_default}]: " if project_default else "  Default project (namespace/name): "
+    if project_default:
+        project_prompt = f"  Default project [{project_default}]: "
+    else:
+        project_prompt = "  Default project (namespace/name): "
     project = input(project_prompt).strip() or project_default
 
     # Save
