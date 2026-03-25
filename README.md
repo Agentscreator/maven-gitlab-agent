@@ -83,6 +83,75 @@ maven open
 
 <br/>
 
+## `>_ gitlab environment setup`
+
+Maven reads GitLab credentials from **environment variables** (highest priority) or from `~/.hive/configuration.json` (set by `maven gitlab setup`).
+
+### Environment Variables
+
+| Variable | Required | Description |
+|:---|:---:|:---|
+| `GITLAB_TOKEN` | ✅ | Personal Access Token with `api` scope |
+| `GITLAB_URL` | — | GitLab instance URL (default: `https://gitlab.com`) |
+| `GITLAB_PROJECT` | — | Default project in `namespace/name` format |
+| `GITLAB_WEBHOOK_SECRET` | — | Secret token for webhook signature verification |
+
+### Minimum Setup
+
+```bash
+export GITLAB_TOKEN=glpat-xxxxxxxxxxxxxxxxxxxx
+export GITLAB_PROJECT=your-namespace/your-project
+```
+
+### Self-Hosted GitLab
+
+```bash
+export GITLAB_URL=https://gitlab.your-company.com
+export GITLAB_TOKEN=glpat-xxxxxxxxxxxxxxxxxxxx
+export GITLAB_PROJECT=your-namespace/your-project
+export GITLAB_WEBHOOK_SECRET=your-webhook-secret
+```
+
+### Token Permissions
+
+Your GitLab Personal Access Token needs the following scopes:
+
+| Scope | Purpose |
+|:---|:---|
+| `api` | Read/write access to projects, MRs, issues, pipelines |
+| `read_repository` | Clone and read repository contents |
+
+Create a token at: `https://gitlab.com/-/user_settings/personal_access_tokens`
+
+### Interactive Setup
+
+```bash
+maven gitlab setup       # guided prompt, saves to ~/.hive/configuration.json
+maven gitlab status      # verify connection
+maven gitlab test        # full connectivity check (auth, project, pipelines, webhooks)
+```
+
+### Webhook Registration
+
+GitLab must be able to reach Maven's server to deliver events. For local development, use a tunnel:
+
+```bash
+# Terminal 1 — start tunnel
+ngrok http 8787
+
+# Terminal 2 — register webhook using the tunnel URL
+maven gitlab register --project your-namespace/your-project \
+  --url https://abc123.ngrok.io/webhooks/gitlab
+```
+
+For production, set `GITLAB_WEBHOOK_SECRET` to validate that payloads come from GitLab.
+
+<br/>
+
+---
+
+<br/>
+
 ## `>_ the problem`
 
 Development teams face what we call the **AI Paradox**: AI writes code faster than ever, but the surrounding process — security reviews, test coverage, CI/CD failures, issue triage, compliance checks — hasn't kept pace. The bottleneck has shifted from writing code to everything around it.
